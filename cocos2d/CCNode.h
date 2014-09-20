@@ -103,26 +103,32 @@ enum {
 @interface CCNode : NSObject
 {
 	// rotation angle
+    // 沿顺时针方向旋转的角度
 	float _rotationX, _rotationY;
 
-	// scaling factors
+	// scaling factors - 默认值为1
 	float _scaleX, _scaleY;
 
 	// openGL real Z vertex
 	float _vertexZ;
 
 	// position of the node
+    // 节点在屏幕中的位置
 	CGPoint _position;
 
 	// skew angles
-	float _skewX, _skewY;
+	float _skewX;       // 沿x轴方向顺时针切向畸变角度（y轴和节点形状左边缘之间的角度） 
+    float _skewY;       // 沿y轴方向逆时针切向畸变角度（x轴和节点形状底边之间的角度）
 
 	// anchor point in points
+    // 以绝对像素值为单位
 	CGPoint _anchorPointInPoints;
 	// anchor point normalized (NOT in points)
+    // 默认值在0 到 1 之间
 	CGPoint _anchorPoint;
 
 	// untransformed size of the node
+    // 未经转换的节点大小，不受缩放，旋转的影响
 	CGSize	_contentSize;
 
 	// transform
@@ -131,15 +137,18 @@ enum {
 	BOOL _isInverseDirty;
 
 	// a Camera
+    // 设置游戏中的视角，只有在创建3D效果时才会用到camera属性
 	CCCamera *_camera;
 
 	// a Grid
 	CCGridBase *_grid;
 
 	// z-order value
+    // 相对于其『兄弟』节点的Z顺序值，拥有最小Z值的节点最先被绘制
 	NSInteger _zOrder;
 
 	// array of children
+    // 节点的子节点数组
 	CCArray *_children;
 
 	// weak ref to parent
